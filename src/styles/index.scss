@@ -1,6 +1,7 @@
 body {
   display: flex;
   flex-direction: column;
+  background-color: #2a2a2a;
 }
 
 .container {
@@ -11,28 +12,27 @@ body {
   box-shadow: 0 4px 4px 0 rgba(60,64,67,0.302), 0 2px 6px 2px rgba(60,64,67,0.149);
   border-radius: 20px;
   justify-content: center;
-  img {
+  canvas {
     border-radius: 20px;
     display: flex;
     margin-top: auto;
     margin-bottom: auto;
     height: 100%;
     width: 100%;
+    image-rendering: optimizeSpeed;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
   }
 }
 
 input {
+  color: white;
+  background: #ecb328;
   margin: 100px auto 0 auto;
   height: 65px;
   width: 600px;
   text-align: center;
   font-size: 50px;
-}
-
-canvas {
-  image-rendering: optimizeSpeed;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: -o-crisp-edges;
-  image-rendering: crisp-edges;
-  -ms-interpolation-mode: nearest-neighbor;
 }

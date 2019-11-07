@@ -1,9 +1,20 @@
 import EventDispatcher from './EventDispatcher';
 
-let frequency;
+let frequency = {};
 
 EventDispatcher.addEventListener('test', (e) => {
-    e.detail.high ? frequency = 'high' : frequency = 'deep';
+    if (e.detail.high) {
+        frequency.type = 'high';
+        frequency.value = e.detail.high;
+    } else if (e.detail.deep) {
+        frequency.type = 'deep';
+        frequency.value = e.detail.deep;
+    } else {
+        frequency.type = 'none';
+        frequency.value = e.detail.none;
+    }
+
+    pixelate(frequency);
 });
 
 let ctx = canvas.getContext('2d');
@@ -17,13 +28,11 @@ ctx.imageSmoothingEnabled = false;
 img.onload = pixelate;
 img.src = '../public/assets/images/breaking.jpg';
 
-function pixelate() {
-    let size = blocks.value * 0.01;
+function pixelate(frequency) {
+    let size = frequency.value * 0.01;
     let w = canvas.width * size;
     let h = canvas.height * size;
 
     ctx.drawImage(img, 0, 0, w, h);
     ctx.drawImage(canvas, 0, 0, w, h, 0, 0, canvas.width, canvas.height);
 }
-
-blocks.addEventListener('change', pixelate, false);

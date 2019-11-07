@@ -10,6 +10,11 @@ let maxAmplitude = 0;
 let sum = 0;
 let count = 0;
 let avg = 0;
+let deep = 0;
+let high = 0;
+let deepEvent = 0;
+let highEvent = 0;
+let none = 0;
 
 navigator.mediaDevices.getUserMedia({ audio: true, video: false })
     .then(function(stream) {
@@ -46,32 +51,37 @@ navigator.mediaDevices.getUserMedia({ audio: true, video: false })
                 maxAmplitude = amplitude;
             }
 
-
-
-
             sum += frequence;
             count++;
 
-            if (count === 10){
+            if (count === 150){
                 avg = sum/count;
                 count = 0;
                 sum = 0;
             }
 
-            if (avg > 3 && avg < 7){
-                console.log('grave');
-                EventDispatcher.dispatchEvent(new CustomEvent('test', {detail: {deep: avg}}));
+            if (avg > 1 && avg < 4) {
+                deep++;
+            } else if (avg > 4.5 && avg < 7) {
+                high++;
+            } else {
+                none++;
             }
 
-
-             if (avg > 17){
-                 EventDispatcher.dispatchEvent(new CustomEvent('test', {detail: {high: avg}}));
+            if (high >= 35) {
+                high = 0;
+                highEvent++;
+                EventDispatcher.dispatchEvent(new CustomEvent('test', {detail: {high: highEvent}}));
+            } else if (deep >= 35) {
+                deep = 0;
+                deepEvent++;
+                EventDispatcher.dispatchEvent(new CustomEvent('test', {detail: {deep: deepEvent}}));
+            } else if (none >= 250) {
+                none = 0;
+                highEvent = 0;
+                deepEvent = 0;
+                EventDispatcher.dispatchEvent(new CustomEvent('test', {detail: {none: 2}}));
             }
-
-
-            // console.log(maxAmplitude)
-
-            // console.log(amplitude);
         };
         mediaStream.connect(recorder);
         recorder.connect(context.destination);
