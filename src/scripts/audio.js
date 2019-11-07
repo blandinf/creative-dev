@@ -1,4 +1,3 @@
-
 // MICROPHONE DETECTION
 let bufferSize = 256;
 
@@ -50,7 +49,7 @@ navigator.mediaDevices.getUserMedia({ audio: true, video: false })
             sum += frequence;
             count++;
 
-            if (count == 10){
+            if (count === 10){
                 avg = sum/count;
                 count = 0;
                 sum = 0;
