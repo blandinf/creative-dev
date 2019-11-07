@@ -1,4 +1,7 @@
 // MICROPHONE DETECTION
+
+import EventDispatcher from './EventDispatcher';
+
 let bufferSize = 256;
 
 let frequence = 0;
@@ -55,15 +58,15 @@ navigator.mediaDevices.getUserMedia({ audio: true, video: false })
                 sum = 0;
             }
 
-            if (avg < 7){
+            if (avg > 3 && avg < 7){
                 console.log('grave');
-
+                EventDispatcher.dispatchEvent(new CustomEvent('test', {detail: {deep: avg}}));
             }
 
 
-            //  if (avg > 17){
-            //     console.log('aigue');
-            // }
+             if (avg > 17){
+                 EventDispatcher.dispatchEvent(new CustomEvent('test', {detail: {high: avg}}));
+            }
 
 
             // console.log(maxAmplitude)

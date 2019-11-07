@@ -1,3 +1,11 @@
+import EventDispatcher from './EventDispatcher';
+
+let frequency;
+
+EventDispatcher.addEventListener('test', (e) => {
+    e.detail.high ? frequency = 'high' : frequency = 'deep';
+});
+
 let ctx = canvas.getContext('2d');
 let img = new Image();
 
