@@ -72,11 +72,11 @@ navigator.mediaDevices.getUserMedia({ audio: true, video: false })
                 high = 0;
                 highEvent++;
                 EventDispatcher.dispatchEvent(new CustomEvent('test', {detail: {high: highEvent}}));
-            } else if (deep >= 35) {
+            } else if (deep >= 60) {
                 deep = 0;
                 deepEvent++;
                 EventDispatcher.dispatchEvent(new CustomEvent('test', {detail: {deep: deepEvent}}));
-            } else if (none >= 250) {
+            } else if (none >= 800) {
                 none = 0;
                 highEvent = 0;
                 deepEvent = 0;

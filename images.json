@@ -1,0 +1,14 @@
+[
+    {
+        "path": "../../public/assets/breaking-bad.jpg",
+        "name": "Breaking bad"
+    },
+    {
+        "path": "../../public/assets/stranger-things.jpg",
+        "name": "Stranger Things"
+    },
+    {
+        "path": "../../public/assets/the-100.jpg",
+        "name": "The 100"
+    }
+]
