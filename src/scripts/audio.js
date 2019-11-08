@@ -79,8 +79,6 @@ navigator.mediaDevices.getUserMedia({ audio: true, video: false })
                 sum = 0;
             }
 
-            console.log(avg);
-
             if (avg < 10) {
                 deep++;
             } else if (avg > 4.5 && avg < 7) {
@@ -89,11 +87,6 @@ navigator.mediaDevices.getUserMedia({ audio: true, video: false })
                 none++;
             }
 
-            // if (high >= 35) {
-            //     high = 0;
-            //     highEvent++;
-            //     EventDispatcher.dispatchEvent(new CustomEvent('test', {detail: {high: highEvent}}));
-            // } else
              if (deep >= 20) {
                 deep = 0;
                 deepEvent++;

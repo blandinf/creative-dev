@@ -24,6 +24,7 @@ input.addEventListener('keyup', (e) => {
             i++;
             e.target.value = '';
             if (i < images.length) {
+                EventDispatcher.dispatchEvent(new CustomEvent('test', {detail: {deep: 50}}));
                 EventDispatcher.dispatchEvent(new CustomEvent('ANIMATION::true'));
                 EventDispatcher.dispatchEvent(new CustomEvent('IMAGE::loaded', {detail: {image: images[i]}}));
             } else {
