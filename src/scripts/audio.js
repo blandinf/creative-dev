@@ -2,9 +2,6 @@
 
 import EventDispatcher from './EventDispatcher';
 
-let canvas = document.querySelector('#audio');
-let c = canvas.getContext("2d");
-
 let bufferSize = 256;
 let frequence = 0;
 let amplitude = 0;
@@ -17,14 +14,6 @@ let high = 0;
 let deepEvent = 0;
 let highEvent = 0;
 let none = 0;
-
-let w = canvas.width;
-let h = canvas.height;
-
-
-
-let x = w / 2;
-let y = h / 2;
 
 
 navigator.mediaDevices.getUserMedia({ audio: true, video: false })
@@ -97,43 +86,7 @@ navigator.mediaDevices.getUserMedia({ audio: true, video: false })
                 EventDispatcher.dispatchEvent(new CustomEvent('test', {detail: {none: 2}}));
             }
 
-
         };
-
-        // draw sound analyser
-
-
-        // function drawSound() {
-        //
-        //     analyser.getByteFrequencyData(frequencyData);
-        //     c.clearRect(0,0,w,h);
-        //
-        //     let n = frequencyData.length;
-        //
-        //
-        //     // c.beginPath();
-        //     // // c.arc(x,y,  300, 0, 2 * Math.PI);
-        //     // c.fill();
-        //
-        //     // ROND
-        //     // for(let i in frequencyData) {
-        //     //     let f = frequencyData[i];
-        //     //     let a = 2*Math.PI*i/(n*0.4);
-        //     //     c.beginPath();
-        //     //     c.strokeStyle = "red";
-        //     //     c.lineWidth = 2;
-        //     //     c.moveTo(w/2+200*Math.cos(a),
-        //     //         h/2+200*Math.sin(a));
-        //     //     c.lineTo(w/2+(200+f)*Math.cos(a),
-        //     //         h/2+(200+f)*Math.sin(a));
-        //     //     c.stroke()
-        //     //
-        //     // }
-        //
-        //     window.requestAnimationFrame(drawSound);
-        //
-        // }
-        // window.requestAnimationFrame(drawSound);
 
         mediaStream.connect(recorder);
         recorder.connect(context.destination);

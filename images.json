@@ -1,14 +1,18 @@
 [
     {
         "path": "../../public/assets/breaking-bad.jpg",
-        "name": "Breaking bad"
+        "name": "Breaking bad",
+        "year": "2019"
     },
     {
         "path": "../../public/assets/stranger-things.jpg",
-        "name": "Stranger Things"
+        "name": "Stranger Things",
+        "year": "1998"
     },
     {
         "path": "../../public/assets/the-100.jpg",
-        "name": "The 100"
+        "name": "The 100",
+        "year": "1996"
+
     }
 ]

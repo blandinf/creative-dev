@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import '../styles/index.scss';
 
 import './pixelate';

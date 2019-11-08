@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import EventDispatcher from './EventDispatcher';
 
 let images;
