@@ -30,7 +30,6 @@ ctx.webkitImageSmoothingEnabled = false;
 ctx.imageSmoothingEnabled = false;
 
 function pixelate(frequency) {
-    console.log(frequency.value)
     let size = frequency.value * 0.01;
     let w = canvas.width * size;
     let h = canvas.height * size;

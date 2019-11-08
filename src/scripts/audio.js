@@ -5,7 +5,6 @@ import EventDispatcher from './EventDispatcher';
 let canvas = document.querySelector('#audio');
 let c = canvas.getContext("2d");
 
-console.log(canvas);
 let bufferSize = 256;
 let frequence = 0;
 let amplitude = 0;
