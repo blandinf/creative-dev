@@ -23,6 +23,11 @@ let w = canvas.width;
 let h = canvas.height;
 
 
+
+let x = w / 2;
+let y = h / 2;
+
+
 navigator.mediaDevices.getUserMedia({ audio: true, video: false })
     .then(function(stream) {
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -68,13 +73,15 @@ navigator.mediaDevices.getUserMedia({ audio: true, video: false })
             sum += frequence;
             count++;
 
-            if (count === 150){
+            if (count === 100){
                 avg = sum/count;
                 count = 0;
                 sum = 0;
             }
 
-            if (avg > 1 && avg < 4) {
+            console.log(avg);
+
+            if (avg < 10) {
                 deep++;
             } else if (avg > 4.5 && avg < 7) {
                 high++;
@@ -82,15 +89,16 @@ navigator.mediaDevices.getUserMedia({ audio: true, video: false })
                 none++;
             }
 
-            if (high >= 35) {
-                high = 0;
-                highEvent++;
-                EventDispatcher.dispatchEvent(new CustomEvent('test', {detail: {high: highEvent}}));
-            } else if (deep >= 60) {
+            // if (high >= 35) {
+            //     high = 0;
+            //     highEvent++;
+            //     EventDispatcher.dispatchEvent(new CustomEvent('test', {detail: {high: highEvent}}));
+            // } else
+             if (deep >= 20) {
                 deep = 0;
                 deepEvent++;
                 EventDispatcher.dispatchEvent(new CustomEvent('test', {detail: {deep: deepEvent}}));
-            } else if (none >= 800) {
+            } else if (none >= 200) {
                 none = 0;
                 highEvent = 0;
                 deepEvent = 0;
@@ -100,31 +108,35 @@ navigator.mediaDevices.getUserMedia({ audio: true, video: false })
 
         };
 
-        // // draw sound analyser
+        // draw sound analyser
+
+
         // function drawSound() {
         //
         //     analyser.getByteFrequencyData(frequencyData);
         //     c.clearRect(0,0,w,h);
         //
+        //     let n = frequencyData.length;
         //
-        //     c.fillStyle = "#fc046c";
-        //     for (let i in frequencyData){
-        //         let n = frequencyData.length;
-        //         let a = (2*Math.PI)*i/n;
-        //         let f = frequencyData[i];
         //
-        //         let p = {
-        //             x: w/2,
-        //             y: h/2,
-        //         };
+        //     // c.beginPath();
+        //     // // c.arc(x,y,  300, 0, 2 * Math.PI);
+        //     // c.fill();
         //
-        //         c.beginPath();
-        //         // c.moveTo(p.x + p.x.Math.cos(a), p.y + p.y.Math.sin(a));
-        //
-        //         c.rect(i*3, 0, 2, f);
-        //
-        //         c.fill();
-        //     }
+        //     // ROND
+        //     // for(let i in frequencyData) {
+        //     //     let f = frequencyData[i];
+        //     //     let a = 2*Math.PI*i/(n*0.4);
+        //     //     c.beginPath();
+        //     //     c.strokeStyle = "red";
+        //     //     c.lineWidth = 2;
+        //     //     c.moveTo(w/2+200*Math.cos(a),
+        //     //         h/2+200*Math.sin(a));
+        //     //     c.lineTo(w/2+(200+f)*Math.cos(a),
+        //     //         h/2+(200+f)*Math.sin(a));
+        //     //     c.stroke()
+        //     //
+        //     // }
         //
         //     window.requestAnimationFrame(drawSound);
         //
