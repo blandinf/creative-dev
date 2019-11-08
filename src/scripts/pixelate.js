@@ -1,7 +1,6 @@
 import EventDispatcher from './EventDispatcher';
 
 let frequency = {};
-let img = new Image();
 
 EventDispatcher.addEventListener('test', (e) => {
     if (e.detail.high) {
@@ -18,16 +17,16 @@ EventDispatcher.addEventListener('test', (e) => {
     pixelate(frequency);
 });
 
-EventDispatcher.addEventListener('IMAGE::loaded', (e) => {
-    img.src = e.detail.image.path;
-    img.onload = pixelate;
-});
-
 let ctx = canvas.getContext('2d');
+let img = new Image();
 
 ctx.mozImageSmoothingEnabled = false;
 ctx.webkitImageSmoothingEnabled = false;
 ctx.imageSmoothingEnabled = false;
+
+
+img.onload = pixelate;
+img.src = '../public/assets/breaking.jpg';
 
 function pixelate(frequency) {
     let size = frequency.value * 0.01;

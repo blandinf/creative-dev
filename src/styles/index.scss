@@ -26,6 +26,9 @@ body {
     image-rendering: crisp-edges;
     -ms-interpolation-mode: nearest-neighbor;
   }
+  #audio{
+    position: absolute;
+  }
 }
 
 input {
