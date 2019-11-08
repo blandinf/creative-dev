@@ -2,8 +2,11 @@
 
 import EventDispatcher from './EventDispatcher';
 
-let bufferSize = 256;
+let canvas = document.querySelector('#audio');
+let c = canvas.getContext("2d");
 
+console.log(canvas);
+let bufferSize = 256;
 let frequence = 0;
 let amplitude = 0;
 let maxAmplitude = 0;
@@ -16,11 +19,22 @@ let deepEvent = 0;
 let highEvent = 0;
 let none = 0;
 
+let w = canvas.width;
+let h = canvas.height;
+
+
 navigator.mediaDevices.getUserMedia({ audio: true, video: false })
     .then(function(stream) {
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
+
         let context = new AudioContext();
         let mediaStream = context.createMediaStreamSource(stream);
+        let analyser = context.createAnalyser();
+        mediaStream.connect(analyser);
+        analyser.fftSize = 2048;
+        console.log(analyser);
+        let frequencyData = new Uint8Array(analyser.frequencyBinCount);
+
         let numberOfInputChannels = 2;
         let numberOfOutputChannels = 2;
         let recorder;
@@ -68,21 +82,55 @@ navigator.mediaDevices.getUserMedia({ audio: true, video: false })
                 none++;
             }
 
-            if (high >= 35) {
+            if (high >= 60) {
                 high = 0;
                 highEvent++;
                 EventDispatcher.dispatchEvent(new CustomEvent('test', {detail: {high: highEvent}}));
-            } else if (deep >= 60) {
+            } else if (deep >= 70) {
                 deep = 0;
                 deepEvent++;
                 EventDispatcher.dispatchEvent(new CustomEvent('test', {detail: {deep: deepEvent}}));
-            } else if (none >= 800) {
+            } else if (none >= 700) {
                 none = 0;
                 highEvent = 0;
                 deepEvent = 0;
                 EventDispatcher.dispatchEvent(new CustomEvent('test', {detail: {none: 2}}));
             }
+
+
         };
+
+        // draw sound analyser
+        function drawSound() {
+
+            analyser.getByteFrequencyData(frequencyData);
+            c.clearRect(0,0,w,h);
+
+
+            c.fillStyle = "#fc046c";
+            for (let i in frequencyData){
+                let n = frequencyData.length;
+                let a = (2*Math.PI)*i/n;
+                let f = frequencyData[i];
+
+                let p = {
+                    x: w/2,
+                    y: h/2,
+                };
+
+                c.beginPath();
+                // c.moveTo(p.x + p.x.Math.cos(a), p.y + p.y.Math.sin(a));
+
+                c.rect(i*3, 0, 2, f);
+
+                c.fill();
+            }
+
+            window.requestAnimationFrame(drawSound);
+
+        }
+        window.requestAnimationFrame(drawSound);
+
         mediaStream.connect(recorder);
         recorder.connect(context.destination);
 
@@ -90,3 +138,7 @@ navigator.mediaDevices.getUserMedia({ audio: true, video: false })
     console.log("Stream not OK");
 
 });
+
+
+
+
