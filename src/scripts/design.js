@@ -22,14 +22,14 @@ async function colors() {
 }
 
 function trueAnimation() {
-
+    new Audio('../../public/assets/success.mp3').play()
 }
 
 function falseAnimation() {
-
+    new Audio('../../public/assets/error.mp3').play()
 }
 
 function endAnimation() {
-
+    new Audio('../../public/assets/win.mp3').play()
 }
 
