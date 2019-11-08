@@ -82,15 +82,15 @@ navigator.mediaDevices.getUserMedia({ audio: true, video: false })
                 none++;
             }
 
-            if (high >= 60) {
+            if (high >= 35) {
                 high = 0;
                 highEvent++;
                 EventDispatcher.dispatchEvent(new CustomEvent('test', {detail: {high: highEvent}}));
-            } else if (deep >= 70) {
+            } else if (deep >= 60) {
                 deep = 0;
                 deepEvent++;
                 EventDispatcher.dispatchEvent(new CustomEvent('test', {detail: {deep: deepEvent}}));
-            } else if (none >= 700) {
+            } else if (none >= 800) {
                 none = 0;
                 highEvent = 0;
                 deepEvent = 0;
@@ -100,36 +100,36 @@ navigator.mediaDevices.getUserMedia({ audio: true, video: false })
 
         };
 
-        // draw sound analyser
-        function drawSound() {
-
-            analyser.getByteFrequencyData(frequencyData);
-            c.clearRect(0,0,w,h);
-
-
-            c.fillStyle = "#fc046c";
-            for (let i in frequencyData){
-                let n = frequencyData.length;
-                let a = (2*Math.PI)*i/n;
-                let f = frequencyData[i];
-
-                let p = {
-                    x: w/2,
-                    y: h/2,
-                };
-
-                c.beginPath();
-                // c.moveTo(p.x + p.x.Math.cos(a), p.y + p.y.Math.sin(a));
-
-                c.rect(i*3, 0, 2, f);
-
-                c.fill();
-            }
-
-            window.requestAnimationFrame(drawSound);
-
-        }
-        window.requestAnimationFrame(drawSound);
+        // // draw sound analyser
+        // function drawSound() {
+        //
+        //     analyser.getByteFrequencyData(frequencyData);
+        //     c.clearRect(0,0,w,h);
+        //
+        //
+        //     c.fillStyle = "#fc046c";
+        //     for (let i in frequencyData){
+        //         let n = frequencyData.length;
+        //         let a = (2*Math.PI)*i/n;
+        //         let f = frequencyData[i];
+        //
+        //         let p = {
+        //             x: w/2,
+        //             y: h/2,
+        //         };
+        //
+        //         c.beginPath();
+        //         // c.moveTo(p.x + p.x.Math.cos(a), p.y + p.y.Math.sin(a));
+        //
+        //         c.rect(i*3, 0, 2, f);
+        //
+        //         c.fill();
+        //     }
+        //
+        //     window.requestAnimationFrame(drawSound);
+        //
+        // }
+        // window.requestAnimationFrame(drawSound);
 
         mediaStream.connect(recorder);
         recorder.connect(context.destination);
