@@ -53,7 +53,4 @@ async function fillInfos() {
     let yearContent = document.createTextNode(img.year);
     year.appendChild(yearContent);
 
-    info.appendChild(title);
-    info.appendChild(year);
-
 }
